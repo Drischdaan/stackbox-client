@@ -2,7 +2,14 @@
   "name": "@stackbox/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build": "nx build",
+    "start": "nx serve",
+    "lint": "nx lint",
+    "test": "nx affected --target=test --parallel=3 --ci --code-coverage",
+    "test:e2e": "nx run stackbox-e2e:e2e",
+    "test:e2e-ci": "nx run stackbox-e2e:e2e-ci"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~18.0.0",
