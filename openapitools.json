@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/@openapitools/openapi-generator-cli/config.schema.json",
+  "spaces": 2,
+  "generator-cli": {
+    "version": "7.5.0",
+    "generators": {
+      "api-stackbox": {
+        "generatorName": "typescript-angular",
+        "output": "#{cwd}/libs/shared/api-stackbox/src/lib/",
+        "glob": "config/stackbox/*.json",
+        "additionalProperties": {
+          "ngVersion": "18.0.0",
+          "modelPropertyNaming": "camelCase",
+          "stringEnums": true,
+          "sortParamsByRequiredFlag": true,
+          "apiModulePrefix": "Stackbox",
+          "configurationPrefix": "Stackbox"
+        }
+      }
+    }
+  }
+}

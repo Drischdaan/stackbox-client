@@ -14,7 +14,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@stackbox/api-stackbox": ["libs/shared/api-stackbox/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

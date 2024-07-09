@@ -1,0 +1,45 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "getPing",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PingResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["app"]
+      }
+    }
+  },
+  "info": {
+    "title": "stackbox-api",
+    "description": "",
+    "version": "0.0.1",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "PingResponse": {
+        "type": "object",
+        "properties": {
+          "ping": {
+            "type": "string"
+          }
+        },
+        "required": ["ping"]
+      }
+    }
+  }
+}

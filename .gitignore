@@ -42,3 +42,6 @@ Thumbs.db
 .nx/workspace-data
 
 .angular
+
+libs/shared/api-stackbox/src/lib/*
+!libs/shared/api-stackbox/src/lib/.gitkeep

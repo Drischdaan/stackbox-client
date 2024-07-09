@@ -66,8 +66,8 @@
     },
     "@nx/angular:library": {
       "linter": "eslint",
-      "style": "scss",
       "unitTestRunner": "jest",
+      "style": "scss",
       "directory": "libs/shared/<name>",
       "flat": true,
       "simpleName": true,
