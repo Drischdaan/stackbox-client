@@ -96,6 +96,42 @@
         "tags": ["workspaces"]
       }
     },
+    "/workspaces/list/info": {
+      "get": {
+        "operationId": "getWorkspacesListInfo",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginationInfoDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["workspaces"]
+      }
+    },
     "/workspaces/{id}": {
       "get": {
         "operationId": "getWorkspaceById",
@@ -273,6 +309,18 @@
           "logoUrl"
         ]
       },
+      "PaginationInfoDto": {
+        "type": "object",
+        "properties": {
+          "totalItems": {
+            "type": "number"
+          },
+          "totalPages": {
+            "type": "number"
+          }
+        },
+        "required": ["totalItems", "totalPages"]
+      },
       "ExceptionResult": {
         "type": "object",
         "properties": {
@@ -325,6 +373,17 @@
           }
         },
         "required": ["id"]
+      },
+      "PaginationOptionsDto": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "number"
+          },
+          "limit": {
+            "type": "number"
+          }
+        }
       }
     }
   }
