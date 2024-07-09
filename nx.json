@@ -63,7 +63,19 @@
       "linter": "eslint",
       "style": "scss",
       "unitTestRunner": "jest"
+    },
+    "@nx/angular:library": {
+      "linter": "eslint",
+      "style": "scss",
+      "unitTestRunner": "jest",
+      "directory": "libs/shared/<name>",
+      "flat": true,
+      "simpleName": true,
+      "prefix": "stackbox",
+      "projectNameAndRootFormat": "as-provided",
+      "tags": "shared"
     }
   },
+  "defaultProject": "stackbox",
   "nxCloudAccessToken": "YjdkN2MwMGEtY2Q5Yi00NzhhLTljY2EtZjlkZWNkZmVjNWUxfHJlYWQtd3JpdGU="
 }
