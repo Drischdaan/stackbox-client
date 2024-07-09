@@ -1,0 +1,9 @@
+{
+  "name": "stackbox-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/stackbox-e2e/src",
+  "implicitDependencies": ["stackbox"],
+  "// targets": "to see all targets run: nx show project stackbox-e2e --web",
+  "targets": {}
+}
