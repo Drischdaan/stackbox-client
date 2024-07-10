@@ -73,7 +73,12 @@
       "simpleName": true,
       "prefix": "stackbox",
       "projectNameAndRootFormat": "as-provided",
-      "tags": "shared"
+      "tags": "shared",
+      "skipModule": true,
+      "standalone": false
+    },
+    "@nx/angular:component": {
+      "style": "scss"
     }
   },
   "defaultProject": "stackbox",

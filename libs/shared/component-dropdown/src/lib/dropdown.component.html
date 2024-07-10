@@ -1,0 +1,60 @@
+<div class="relative">
+  <button
+    class="h-10 px-4 py-2 border bg-white rounded-md flex flex-row justify-between items-center gap-5 w-full hover:bg-surface-100 transition-colors duration-300 disabled:bg-surface-100 disabled:cursor-not-allowed"
+    (click)="toggleDropdown()"
+    [disabled]="disabled()"
+  >
+    @if(getItem(selectedId()); as item) {
+    <div class="flex flex-row justify-center items-center gap-2">
+      @if(logoPath()) {
+      <img
+        class="w-6 h-6 rounded-sm border"
+        [src]="getItemLogo(item)"
+        alt="logo"
+      />
+      }
+      <span>{{ getItemName(item) }}</span>
+    </div>
+    } @else {
+    <div class="flex justify-center items-center">
+      <span class="text-neutral-500 group-disabled:text-neutral-400"
+        >Select an item</span
+      >
+    </div>
+    }
+    <div
+      class="flex justify-center items-center group-disabled:text-neutral-400"
+    >
+      @if(open()) {
+
+      <ng-icon name="lucideChevronUp"></ng-icon>
+      } @else {
+
+      <ng-icon name="lucideChevronDown"></ng-icon>
+      }
+    </div>
+  </button>
+  @if(open()) {
+  <div
+    class="absolute bg-white border left-0 right-0 mt-2 shadow-md rounded-md z-20 p-1"
+  >
+    <ul class="flex flex-col">
+      @for (item of filteredItems(); track $index) {
+      <li
+        class="flex flex-row justify-start items-center cursor-pointer w-full hover:bg-surface-200 rounded-md transition-colors duration-300 px-3 py-2 gap-2"
+        (click)="selectItem(item)"
+      >
+        @if(logoPath()) {
+        <img
+          class="w-6 h-6 rounded-sm border"
+          [src]="getItemLogo(item)"
+          alt="logo"
+        />
+        }
+        <span>{{ getItemName(item) }}</span>
+      </li>
+      }
+    </ul>
+  </div>
+  }
+</div>
