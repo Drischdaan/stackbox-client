@@ -16,6 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@stackbox/api-stackbox": ["libs/shared/api-stackbox/src/index.ts"],
+      "@stackbox/data-access-workspaces": [
+        "libs/shared/data-access-workspaces/src/index.ts"
+      ],
       "@stackbox/utils-store-features": [
         "libs/shared/utils-store-features/src/index.ts"
       ]
