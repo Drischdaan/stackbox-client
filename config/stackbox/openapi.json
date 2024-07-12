@@ -47,10 +47,23 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WorkspaceEntity"
-                  }
+                  "title": "PaginatedWorkspacesList",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/PaginationDto"
+                    },
+                    {
+                      "properties": {
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/WorkspaceEntity"
+                          }
+                        }
+                      },
+                      "required": ["items"]
+                    }
+                  ]
                 }
               }
             }
@@ -88,42 +101,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ExceptionResult"
-                }
-              }
-            }
-          }
-        },
-        "tags": ["workspaces"]
-      }
-    },
-    "/workspaces/list/info": {
-      "get": {
-        "operationId": "getWorkspacesListInfo",
-        "parameters": [
-          {
-            "name": "page",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "name": "limit",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "number"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PaginationInfoDto"
                 }
               }
             }
@@ -254,6 +231,218 @@
         },
         "tags": ["workspaces"]
       }
+    },
+    "/products": {
+      "get": {
+        "operationId": "getProductsList",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "PaginatedProductsList",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/PaginationDto"
+                    },
+                    {
+                      "properties": {
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ProductEntity"
+                          }
+                        }
+                      },
+                      "required": ["items"]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": ["products"]
+      },
+      "post": {
+        "operationId": "createProduct",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductEntity"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionResult"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["products"]
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "operationId": "getProductById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductEntity"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionResult"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["products"]
+      },
+      "patch": {
+        "operationId": "updateProduct",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductEntity"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionResult"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["products"]
+      },
+      "delete": {
+        "operationId": "deleteProduct",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletionResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionResult"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["products"]
+      }
     }
   },
   "info": {
@@ -274,6 +463,27 @@
           }
         },
         "required": ["ping"]
+      },
+      "PaginationInfoDto": {
+        "type": "object",
+        "properties": {
+          "totalItems": {
+            "type": "number"
+          },
+          "totalPages": {
+            "type": "number"
+          }
+        },
+        "required": ["totalItems", "totalPages"]
+      },
+      "PaginationDto": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/PaginationInfoDto"
+          }
+        },
+        "required": ["meta"]
       },
       "WorkspaceEntity": {
         "type": "object",
@@ -308,18 +518,6 @@
           "description",
           "logoUrl"
         ]
-      },
-      "PaginationInfoDto": {
-        "type": "object",
-        "properties": {
-          "totalItems": {
-            "type": "number"
-          },
-          "totalPages": {
-            "type": "number"
-          }
-        },
-        "required": ["totalItems", "totalPages"]
       },
       "ExceptionResult": {
         "type": "object",
@@ -373,6 +571,75 @@
           }
         },
         "required": ["id"]
+      },
+      "ProductEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "logoUrl": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "name",
+          "description",
+          "logoUrl"
+        ]
+      },
+      "ProductCreateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "logoUrl": {
+            "type": "string"
+          },
+          "workspaceId": {
+            "type": "string"
+          }
+        },
+        "required": ["name", "description", "workspaceId"]
+      },
+      "ProductUpdateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "logoUrl": {
+            "type": "string"
+          },
+          "workspaceId": {
+            "type": "string"
+          }
+        }
       },
       "PaginationOptionsDto": {
         "type": "object",
