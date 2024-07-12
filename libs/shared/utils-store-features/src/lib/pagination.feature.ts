@@ -45,7 +45,7 @@ export function withPagination<EntityType extends Entity>(
       return {
         nextPage: () => {
           patchState(state, {
-            page: Math.min(state.page() + 1, state.listInfo().totalPages),
+            page: Math.min(state.page() + 1, state.paginationInfo().totalPages),
           });
           state.loadList({ page: state.page(), limit: state.limit() });
         },
@@ -56,12 +56,10 @@ export function withPagination<EntityType extends Entity>(
         setLimit: (limit: number) => {
           patchState(state, { limit: Math.max(limit, 0) });
           state.loadList({ page: state.page(), limit: state.limit() });
-          state.loadListInfo({ page: state.page(), limit: state.limit() });
         },
         setPage: (page: number) => {
           patchState(state, { page: Math.max(page, 0) });
           state.loadList({ page: state.page(), limit: state.limit() });
-          state.loadListInfo({ page: state.page(), limit: state.limit() });
         },
       };
     })

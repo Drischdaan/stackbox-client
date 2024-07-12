@@ -1,29 +1,21 @@
 import { Injectable } from '@angular/core';
 import {
   DeletionResult,
-  PaginationInfoDto,
   PaginationOptionsDto,
   WorkspaceCreateDto,
   WorkspaceEntity,
   WorkspacesService,
 } from '@stackbox/api-stackbox';
-import { ICrudService } from '@stackbox/utils-store-features';
+import { ICrudService, IPaginationDto } from '@stackbox/utils-store-features';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class WorkspacesCrudService implements ICrudService<WorkspaceEntity> {
   constructor(private readonly workspacesService: WorkspacesService) {}
 
-  getPaginationInfo(
+  getPaginatedList(
     options?: PaginationOptionsDto
-  ): Observable<PaginationInfoDto> {
-    return this.workspacesService.getWorkspacesListInfo(
-      options?.page,
-      options?.limit
-    );
-  }
-
-  getList(options?: PaginationOptionsDto): Observable<WorkspaceEntity[]> {
+  ): Observable<IPaginationDto<WorkspaceEntity>> {
     return this.workspacesService.getWorkspacesList(
       options?.page,
       options?.limit

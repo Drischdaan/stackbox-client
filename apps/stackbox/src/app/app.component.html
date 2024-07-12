@@ -2,13 +2,13 @@
 <div class="p-5">
   <div class="p-5 bg-white h-80 flex flex-col gap-5 rounded-md">
     <stackbox-dropdown
-      [items]="items"
+      [items]="workspacesStore.entities()"
       logoPath="logo"
       (onSelect)="onSelectItem($event)"
       [disabled]="false"
     ></stackbox-dropdown>
     <stackbox-dropdown
-      [items]="items"
+      [items]="workspacesStore.entities()"
       logoPath="logo"
       (onSelect)="onSelectItem($event)"
       [disabled]="true"

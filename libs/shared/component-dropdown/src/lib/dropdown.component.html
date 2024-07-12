@@ -25,13 +25,20 @@
     <div
       class="flex justify-center items-center group-disabled:text-neutral-400"
     >
-      @if(open()) {
+      @if(selectedId() !== null) {
+      <button
+        (click)="selectItem(null)"
+        class="flex justify-center items-center text-neutral-400"
+      >
+        <ng-icon name="lucideX"></ng-icon>
+      </button>
+      } @else { @if(open()) {
 
       <ng-icon name="lucideChevronUp"></ng-icon>
       } @else {
 
       <ng-icon name="lucideChevronDown"></ng-icon>
-      }
+      } }
     </div>
   </button>
   @if(open()) {
@@ -39,7 +46,9 @@
     class="absolute bg-white border left-0 right-0 mt-2 shadow-md rounded-md z-20 p-1"
   >
     <ul class="flex flex-col">
-      @for (item of filteredItems(); track $index) {
+      @if(filteredItems().length === 0) {
+      <li class="p-2 text-neutral-500">No items found</li>
+      } @for (item of filteredItems(); track $index) {
       <li
         class="flex flex-row justify-start items-center cursor-pointer w-full hover:bg-surface-200 rounded-md transition-colors duration-300 px-3 py-2 gap-2"
         (click)="selectItem(item)"

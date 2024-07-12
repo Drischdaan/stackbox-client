@@ -29,25 +29,28 @@ export type CrudServiceState = {
   isLoadingList: boolean;
   isLoadingById: boolean;
   isSaving: boolean;
-  listInfo: PaginationInfoDto;
+  paginationInfo: PaginationInfoDto;
 };
 
 export type CreateDto<Entity> = Partial<Entity>;
 export type UpdateDto<Entity> = Partial<Entity>;
 
-export interface ICrudService<Entity extends { id: EntityId }> {
-  getPaginationInfo(
+export interface IPaginationDto<Entity> {
+  meta: PaginationInfoDto;
+  items: Entity[];
+}
+
+export interface ICrudService<TEntity extends { id: EntityId }> {
+  getPaginatedList(
     options?: PaginationOptionsDto
-  ): Observable<PaginationInfoDto>;
-  getList(options?: PaginationOptionsDto): Observable<Entity[]>;
-  getById(id: string): Observable<Entity>;
-  create(createDto: CreateDto<Entity>): Observable<Entity>;
-  update(id: string, updateDto: UpdateDto<Entity>): Observable<Entity>;
+  ): Observable<IPaginationDto<TEntity>>;
+  getById(id: string): Observable<TEntity>;
+  create(createDto: CreateDto<TEntity>): Observable<TEntity>;
+  update(id: string, updateDto: UpdateDto<TEntity>): Observable<TEntity>;
   delete(id: string): Observable<DeletionResult>;
 }
 
 export type CrudServiceMethods<EntityType extends Entity> = {
-  loadListInfo: RxMethod<PaginationOptionsDto>;
   loadList: RxMethod<PaginationOptionsDto>;
   loadById: RxMethod<string>;
   create: RxMethod<CreateDto<EntityType>>;
@@ -75,7 +78,7 @@ export function withCrudService<EntityType extends Entity>(
       isLoadingList: false,
       isLoadingById: false,
       isSaving: false,
-      listInfo: {
+      paginationInfo: {
         totalItems: 0,
         totalPages: 0,
       },
@@ -83,28 +86,16 @@ export function withCrudService<EntityType extends Entity>(
     withMethods((state) => {
       const service: ICrudService<EntityType> = inject(serviceToken);
       return {
-        loadListInfo: rxMethod<PaginationOptionsDto>(
-          pipe(
-            tap(() => patchState(state, { isLoadingList: true })),
-            switchMap((options) =>
-              service.getPaginationInfo(options).pipe(
-                tapResponse({
-                  next: (info) => patchState(state, { listInfo: info }),
-                  error: console.error,
-                  finalize: () => patchState(state, { isLoadingList: false }),
-                })
-              )
-            )
-          )
-        ),
         loadList: rxMethod<PaginationOptionsDto>(
           pipe(
             tap(() => patchState(state, { isLoadingList: true })),
             switchMap((options) =>
-              service.getList(options).pipe(
+              service.getPaginatedList(options).pipe(
                 tapResponse({
-                  next: (entities) =>
-                    patchState(state, setAllEntities(entities)),
+                  next: (paginationDto) =>
+                    patchState(state, setAllEntities(paginationDto.items), {
+                      paginationInfo: paginationDto.meta,
+                    }),
                   error: console.error,
                   finalize: () => patchState(state, { isLoadingList: false }),
                 })
