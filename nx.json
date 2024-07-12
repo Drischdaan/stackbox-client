@@ -68,7 +68,6 @@
       "linter": "eslint",
       "unitTestRunner": "jest",
       "style": "scss",
-      "directory": "libs/shared/<name>",
       "flat": true,
       "simpleName": true,
       "prefix": "stackbox",

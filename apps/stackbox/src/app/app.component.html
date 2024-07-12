@@ -1,6 +1,6 @@
 <router-outlet></router-outlet>
 <div class="p-5">
-  <div class="p-5 bg-white h-80 flex flex-col gap-5">
+  <div class="p-5 bg-white h-80 flex flex-col gap-5 rounded-md">
     <stackbox-dropdown
       [items]="items"
       logoPath="logo"
@@ -13,5 +13,105 @@
       (onSelect)="onSelectItem($event)"
       [disabled]="true"
     ></stackbox-dropdown>
+  </div>
+  <div class="p-5 bg-white min-h-80 flex flex-col gap-5 rounded-md mt-10">
+    <button (click)="loading.set(!loading())">Set Loading</button>
+    <stackbox-button
+      icon="lucideActivity"
+      [loading]="loading()"
+      size="full"
+      [disabled]="true"
+      [variant]="'default'"
+      >Test</stackbox-button
+    >
+    <stackbox-button
+      icon="lucideActivity"
+      [loading]="loading()"
+      size="full"
+      [disabled]="false"
+      [variant]="'default'"
+      [iconOnly]="true"
+      >Test</stackbox-button
+    >
+    <stackbox-button
+      icon="lucideActivity"
+      [loading]="loading()"
+      size="full"
+      [disabled]="true"
+      [variant]="'secondary'"
+      >Test</stackbox-button
+    >
+    <stackbox-button
+      icon="lucideActivity"
+      [loading]="loading()"
+      size="full"
+      [disabled]="false"
+      [variant]="'secondary'"
+      >Test</stackbox-button
+    >
+    <stackbox-button
+      icon="lucideActivity"
+      [loading]="loading()"
+      size="full"
+      [disabled]="true"
+      [variant]="'destructive'"
+      >Test</stackbox-button
+    >
+    <stackbox-button
+      icon="lucideActivity"
+      [loading]="loading()"
+      size="full"
+      [disabled]="false"
+      [variant]="'destructive'"
+      >Test</stackbox-button
+    >
+    <stackbox-button
+      icon="lucideActivity"
+      [loading]="loading()"
+      size="full"
+      [disabled]="true"
+      [variant]="'outline'"
+      >Test</stackbox-button
+    >
+    <stackbox-button
+      icon="lucideActivity"
+      [loading]="loading()"
+      size="full"
+      [disabled]="false"
+      [variant]="'outline'"
+      >Test</stackbox-button
+    >
+    <stackbox-button
+      icon="lucideActivity"
+      [loading]="loading()"
+      size="full"
+      [disabled]="true"
+      [variant]="'ghost'"
+      >Test</stackbox-button
+    >
+    <stackbox-button
+      icon="lucideActivity"
+      [loading]="loading()"
+      size="full"
+      [disabled]="false"
+      [variant]="'ghost'"
+      >Test</stackbox-button
+    >
+    <stackbox-button
+      icon="lucideActivity"
+      [loading]="loading()"
+      size="full"
+      [disabled]="true"
+      [variant]="'link'"
+      >Test</stackbox-button
+    >
+    <stackbox-button
+      icon="lucideActivity"
+      [loading]="loading()"
+      size="full"
+      [disabled]="false"
+      [variant]="'link'"
+      >Test</stackbox-button
+    >
   </div>
 </div>

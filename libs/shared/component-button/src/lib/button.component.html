@@ -1,0 +1,31 @@
+<button
+  [classList]="getClasses(variant(), size())"
+  [disabled]="isDisabled()"
+  (click)="onClick()"
+>
+  @if(loading()) {
+  <div
+    class="flex flex-row gap-2 justify-center items-center absolute left-0 right-0 top-0 bottom-0 m-auto"
+  >
+    <ng-icon name="lucideLoader2" class="flex-initial animate-spin"></ng-icon>
+    @if(loadingText(); as loadingText) {
+    <span>{{ loadingText }}</span>
+    }
+  </div>
+  } @if(icon(); as icon) {
+  <ng-icon
+    [name]="icon"
+    [ngClass]="{
+      'opacity-0': loading()
+    }"
+  ></ng-icon>
+  } @if(!iconOnly()) {
+  <div
+    [ngClass]="{
+      'opacity-0': loading()
+    }"
+  >
+    <ng-content></ng-content>
+  </div>
+  }
+</button>

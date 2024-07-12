@@ -16,6 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@stackbox/api-stackbox": ["libs/shared/api-stackbox/src/index.ts"],
+      "@stackbox/component-button": [
+        "libs/shared/component-button/src/index.ts"
+      ],
       "@stackbox/component-dropdown": [
         "libs/shared/component-dropdown/src/index.ts"
       ],
